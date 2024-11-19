@@ -1,0 +1,1793 @@
+local correctKey = "9vcAJ7DEzpzS1yYOjYu02"
+local isKeyEntered = false
+
+
+local keyInputGui = Instance.new("ScreenGui")
+local keyFrame = Instance.new("Frame")
+local keyLabel = Instance.new("TextLabel")
+local zaynKeySystemLabel = Instance.new("TextLabel")
+local keyTextBox = Instance.new("TextBox")
+local submitButton = Instance.new("TextButton")
+local getKeyButton = Instance.new("TextButton")
+local uiCorner = Instance.new("UICorner")
+
+
+keyInputGui.Parent = game.CoreGui
+
+
+keyFrame.Size = UDim2.new(0, 400, 0, 260)
+keyFrame.Position = UDim2.new(0.5, -200, 0.5, -130)
+keyFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+keyFrame.BorderSizePixel = 0
+keyFrame.BackgroundTransparency = 0.15
+keyFrame.Parent = keyInputGui
+
+
+uiCorner.CornerRadius = UDim.new(0, 10)
+uiCorner.Parent = keyFrame
+
+
+keyLabel.Text = "Enter Key:"
+keyLabel.Size = UDim2.new(1, 0, 0.15, 0)
+keyLabel.Position = UDim2.new(0, 0, 0, 10)
+keyLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+keyLabel.Font = Enum.Font.GothamBold
+keyLabel.TextSize = 24
+keyLabel.TextStrokeTransparency = 0.8
+keyLabel.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+keyLabel.BackgroundTransparency = 1
+keyLabel.Parent = keyFrame
+
+ 
+zaynKeySystemLabel.Text = "hassanxzayn keysystem v1.0"
+zaynKeySystemLabel.Size = UDim2.new(1, 0, 0.15, 0)
+zaynKeySystemLabel.Position = UDim2.new(0, 0, 0.15, 0)
+zaynKeySystemLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+zaynKeySystemLabel.Font = Enum.Font.GothamBold
+zaynKeySystemLabel.TextSize = 18
+zaynKeySystemLabel.TextStrokeTransparency = 0.8
+zaynKeySystemLabel.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+zaynKeySystemLabel.BackgroundTransparency = 1
+zaynKeySystemLabel.Parent = keyFrame
+
+
+keyTextBox.Size = UDim2.new(0.9, 0, 0.2, 0)
+keyTextBox.Position = UDim2.new(0.05, 0, 0.35, 0)
+keyTextBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+keyTextBox.BorderColor3 = Color3.fromRGB(0, 191, 255)
+keyTextBox.BorderSizePixel = 2
+keyTextBox.Font = Enum.Font.Gotham
+keyTextBox.TextSize = 18
+keyTextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+keyTextBox.PlaceholderText = "Type the key"
+keyTextBox.PlaceholderColor3 = Color3.fromRGB(200, 200, 200)
+keyTextBox.Text = ""
+keyTextBox.Parent = keyFrame
+
+
+local textBoxCorner = uiCorner:Clone()
+textBoxCorner.Parent = keyTextBox
+
+
+submitButton.Text = "Submit"
+submitButton.Size = UDim2.new(0.42, 0, 0.2, 0)
+submitButton.Position = UDim2.new(0.05, 0, 0.65, 0)
+submitButton.BackgroundColor3 = Color3.fromRGB(0, 102, 255)
+submitButton.BorderSizePixel = 0
+submitButton.Font = Enum.Font.GothamBold
+submitButton.TextSize = 20
+submitButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+submitButton.TextStrokeTransparency = 0.6
+submitButton.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+submitButton.AutoButtonColor = false
+submitButton.Parent = keyFrame
+
+
+local submitButtonCorner = uiCorner:Clone()
+submitButtonCorner.Parent = submitButton
+
+
+getKeyButton.Text = "Get Key"
+getKeyButton.Size = UDim2.new(0.42, 0, 0.2, 0)
+getKeyButton.Position = UDim2.new(0.53, 0, 0.65, 0)
+getKeyButton.BackgroundColor3 = Color3.fromRGB(255, 102, 0)
+getKeyButton.BorderSizePixel = 0
+getKeyButton.Font = Enum.Font.GothamBold
+getKeyButton.TextSize = 20
+getKeyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+getKeyButton.TextStrokeTransparency = 0.6
+getKeyButton.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+getKeyButton.AutoButtonColor = false
+getKeyButton.Parent = keyFrame
+
+
+local getKeyButtonCorner = uiCorner:Clone()
+getKeyButtonCorner.Parent = getKeyButton
+
+
+submitButton.MouseEnter:Connect(function()
+    submitButton.BackgroundColor3 = Color3.fromRGB(0, 120, 255)
+end)
+
+submitButton.MouseLeave:Connect(function()
+    submitButton.BackgroundColor3 = Color3.fromRGB(0, 102, 255)
+end)
+
+getKeyButton.MouseEnter:Connect(function()
+    getKeyButton.BackgroundColor3 = Color3.fromRGB(255, 120, 0)
+end)
+
+getKeyButton.MouseLeave:Connect(function()
+    getKeyButton.BackgroundColor3 = Color3.fromRGB(255, 102, 0)
+end)
+
+
+local function copyToClipboard(text)
+    setclipboard(text)
+end
+
+
+local function showNotification(message)
+    local notification = Instance.new("TextLabel")
+    notification.Size = UDim2.new(0, 220, 0, 50)
+    notification.Position = UDim2.new(0.5, -110, 0.25, 0)
+    notification.BackgroundTransparency = 1
+    notification.TextColor3 = Color3.fromRGB(255, 255, 255)
+    notification.Font = Enum.Font.GothamBold
+    notification.TextSize = 18
+    notification.Text = message
+    notification.Parent = keyInputGui
+    notification.TextStrokeTransparency = 0.6
+    notification.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+    
+
+    local notificationCorner = uiCorner:Clone()
+    notificationCorner.Parent = notification
+
+
+    wait(2)
+    notification:Destroy()
+end
+
+
+getKeyButton.MouseButton1Click:Connect(function()
+    local link = "https://zks1.blogspot.com/?post=1559877049791392863"
+    copyToClipboard(link)
+    showNotification("Link copied successfully! Paste in your browser to get the key.")
+end)
+
+
+submitButton.MouseButton1Click:Connect(function()
+    if keyTextBox.Text == correctKey then
+        isKeyEntered = true
+        keyInputGui:Destroy() 
+        loadMainScript()      
+    else
+        keyLabel.Text = "Incorrect Key"
+        keyLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
+        
+
+        keyLabel.TextWrapped = true
+        
+
+        keyLabel.Size = UDim2.new(1, 0, 0.2, 0)
+        keyTextBox.Text = ""
+    end
+end)
+
+
+
+
+function loadMainScript()
+
+
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+local Window = OrionLib:MakeWindow({Name = "Fisch | NEOX Hub V1.1", HidePremium = false, SaveConfig = false, ConfigFolder = "OrionTest"})
+
+local HomeTab = Window:MakeTab({
+	Name = "Home",
+	Icon = "rbxassetid://7733960981",
+	PremiumOnly = false
+})
+
+HomeTab:AddParagraph("Why????","I know you probably don’t love my key system (let’s be real, who does?), but I gotta pay bills too. I’m kinda broke, and your support is like the Wi-Fi to my life—I can’t function without it. Seriously, it means the world to me (and my wallet). Thanks for keeping me alive out here!")
+
+    local jokes = {
+        "Why don't scientists trust atoms? Because they make up everything!",
+        "Why did the scarecrow win an award? Because he was outstanding in his field!",
+        "Why don’t skeletons fight each other? They don’t have the guts.",
+        "What do you call fake spaghetti? An impasta!",
+        "Why couldn’t the bicycle stand up by itself? It was two tired.",
+        "What did the grape do when he got stepped on? Nothing but let out a little wine!",
+        "Why do seagulls fly over the ocean? Because if they flew over the bay, they’d be bagels!",
+        "I told my computer I needed a break, and now it won’t stop sending me Kit-Kats.",
+        "Why did the math book look sad? Because it had too many problems.",
+        "Why did the golfer bring two pairs of pants? In case he got a hole in one!",
+        "Why can’t you hear a pterodactyl in the bathroom? Because the ‘P’ is silent.",
+        "What did the ocean say to the beach? Nothing, it just waved.",
+        "Why don’t eggs tell jokes? They’d crack each other up.",
+        "How do you organize a space party? You planet.",
+        "Why did the tomato turn red? Because it saw the salad dressing!",
+        "What do you call a belt with a watch on it? A waist of time.",
+        "Why don’t skeletons fight each other? They don’t have the guts.",
+        "Why did the computer catch a cold? It left its Windows open.",
+        "How does a penguin build its house? Igloos it together.",
+        "Why can’t your nose be 12 inches long? Because then it would be a foot!",
+        "Why don't skeletons fight each other? They don't have the guts.",
+"Why did the math book look sad? Because it had too many problems.",
+"What do you call fake spaghetti? An impasta!",
+"Why don't eggs tell jokes? They'd crack each other up.",
+"How do you organize a space party? You planet.",
+"Why did the tomato turn red? Because it saw the salad dressing.",
+"Why did the golfer bring two pairs of pants? In case he got a hole in one.",
+"What do you call cheese that isn’t yours? Nacho cheese!",
+"Why was the math teacher suspicious of prime numbers? They were acting odd.",
+"What do you call a pile of cats? A meow-tain.",
+"How does a penguin build its house? Igloos it together.",
+"Why don't skeletons fight each other? They don't have the stomach.",
+"What did the ocean say to the beach? Nothing, it just waved.",
+"Why did the computer catch a cold? It left its Windows open.",
+"Why don't seagulls fly over the bay? Because then they'd be bagels!",
+"What do you call an alligator in a vest? An investigator!",
+"How do you catch a squirrel? Climb a tree and act like a nut.",
+"Why was the broom late? It swept in.",
+"What do you call a sleeping bull? A bulldozer.",
+"Why can’t your nose be 12 inches long? Because then it would be a foot!",
+"Why did the bicycle fall over? Because it was two-tired.",
+"Why did the scarecrow win an award? Because he was outstanding in his field!",
+"Why don’t skeletons fight each other? They don’t have the guts.",
+"What did the grape do when it got stepped on? Nothing but let out a little wine!",
+"Why did the chicken join a band? Because it had drumsticks!",
+"Why don't you ever see elephants hiding in trees? Because they’re really good at it.",
+"What do you call fake spaghetti? An impasta!",
+"Why did the golfer bring two pairs of pants? In case he got a hole in one!",
+"Why did the bicycle fall over? Because it was two-tired.",
+"How do you make a tissue dance? You put a little boogey in it!",
+"What do you call a cow with no legs? Ground beef!",
+"What do you call a fish with no eyes? Fsh.",
+"Why don’t oysters donate to charity? Because they are shellfish.",
+"What do you call a can opener that doesn’t work? A can’t opener.",
+"Why don't skeletons fight each other? They don’t have the guts.",
+"What do you call a pile of cats? A meow-tain.",
+"Why did the scarecrow win an award? Because he was outstanding in his field.",
+"How does a penguin build its house? Igloos it together.",
+"Why don’t skeletons fight each other? They don’t have the guts.",
+"What do you call a belt with a clock on it? A waist of time.",
+"Why did the chicken go to the seance? To talk to the other side.",
+"What do you call a bear with no teeth? A gummy bear!",
+"Why don't seagulls fly over the bay? Because then they'd be bagels!",
+"Why was the broom late? It swept in.",
+"What did the left eye say to the right eye? Between you and me, something smells.",
+"How do you organize a space party? You planet.",
+"What did one ocean say to the other ocean? Nothing, they just waved.",
+"Why don't skeletons fight each other? They don’t have the guts.",
+"What did the fish say when it hit the wall? Dam.",
+"Why don’t oysters share their pearls? Because they’re shellfish.",
+"Why did the computer go to the doctor? Because it had a virus!",
+"What did one hat say to the other? Stay here, I'm going on ahead!",
+"Why did the coffee file a police report? It got mugged.",
+"What do you call a boomerang that doesn’t come back? A stick.",
+"Why do cows wear bells? Because their horns don’t work.",
+"What do you call cheese that’s not yours? Nacho cheese.",
+"Why don’t you ever see elephants hiding in trees? Because they’re really good at it.",
+"Why don’t skeletons fight each other? They don’t have the guts.",
+"How do you make a tissue dance? You put a little boogey in it!",
+"What do you call a dog magician? A labracadabrador.",
+"What do you call a pile of kittens? A meow-tain.",
+"Why did the bicycle fall over? Because it was two-tired.",
+"How do you make a tissue dance? You put a little boogey in it!",
+"What do you call an alligator in a vest? An investigator!",
+"Why don't skeletons fight each other? They don't have the guts.",
+"What do you call a cow with no legs? Ground beef!",
+"What do you call a fish with no eyes? Fsh.",
+"Why don't oysters donate to charity? Because they are shellfish.",
+"What do you call a can opener that doesn’t work? A can’t opener.",
+"Why don’t skeletons fight each other? They don’t have the guts.",
+"What do you call a pile of cats? A meow-tain.",
+"Why did the scarecrow win an award? Because he was outstanding in his field.",
+"How does a penguin build its house? Igloos it together.",
+"Why don’t skeletons fight each other? They don’t have the guts.",
+"What do you call a belt with a clock on it? A waist of time.",
+"Why did the chicken go to the seance? To talk to the other side.",
+"What do you call a bear with no teeth? A gummy bear!",
+"Why don't seagulls fly over the bay? Because then they'd be bagels!",
+"Why was the broom late? It swept in.",
+"What did the left eye say to the right eye? Between you and me, something smells.",
+"How do you organize a space party? You planet.",
+"What did one ocean say to the other ocean? Nothing, they just waved.",
+"Why don't skeletons fight each other? They don’t have the guts.",
+"What did the fish say when it hit the wall? Dam.",
+"Why don’t oysters share their pearls? Because they’re shellfish.",
+"Why did the computer go to the doctor? Because it had a virus!",
+"What did one hat say to the other? Stay here, I'm going on ahead!",
+"Why did the coffee file a police report? It got mugged.",
+"What do you call a boomerang that doesn’t come back? A stick.",
+"Why do cows wear bells? Because their horns don’t work.",
+"What do you call cheese that’s not yours? Nacho cheese.",
+"Why don’t you ever see elephants hiding in trees? Because they’re really good at it.",
+"Why don’t skeletons fight each other? They don’t have the guts.",
+"How do you make a tissue dance? You put a little boogey in it!",
+"What do you call a dog magician? A labracadabrador.",
+"What do you call a pile of kittens? A meow-tain.",
+"Why did the bicycle fall over? Because it was two-tired.",
+"How do you make a tissue dance? You put a little boogey in it!",
+"What do you call an alligator in a vest? An investigator!",
+"Why don't skeletons fight each other? They don't have the guts."
+    }
+    
+    local function getRandomJoke()
+        return jokes[math.random(#jokes)]
+    end
+    
+
+    local paragraph = HomeTab:AddParagraph("Random Ass Not Funny Jokes", getRandomJoke())
+    
+
+    task.spawn(function()
+        while true do
+            local newJoke = getRandomJoke()
+            paragraph:Set(getRandomJoke())
+            wait(30)
+        end
+    end)
+
+    local Section = HomeTab:AddSection({
+        Name = "Let' be real now"
+    })
+
+    HomeTab:AddParagraph("Upcoming Updates","1.Better GUI | 2.New Features | 3.Discord & More..")
+
+
+
+local MainTab = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://7733749837",
+	PremiumOnly = false
+})
+
+
+local Section = MainTab:AddSection({
+	Name = "Status"
+})
+
+
+local levelLabel = MainTab:AddLabel("Current Level: Loading...")
+
+
+local player = game:GetService("Players").LocalPlayer
+local leaderstats = player:WaitForChild("leaderstats", 10)
+local levelValue = leaderstats and leaderstats:FindFirstChild("Level")
+
+if levelValue then
+
+    local function updateLevelLabel()
+        levelLabel:Set("Current Level: " .. tostring(levelValue.Value))
+    end
+
+
+    levelValue.Changed:Connect(updateLevelLabel)
+
+
+    updateLevelLabel()
+else
+
+    levelLabel:Set("Current Level: Error - Level not found!")
+end
+
+
+local cashLabel = MainTab:AddLabel("Total C$: Loading...")
+
+
+local player = game:GetService("Players").LocalPlayer
+local leaderstats = player:WaitForChild("leaderstats", 10)
+local cashValue = leaderstats and leaderstats:FindFirstChild("C$")
+
+if cashValue then
+
+    local function updateCashLabel()
+        cashLabel:Set("Total Cash: " .. tostring(cashValue.Value))
+    end
+
+
+    cashValue.Changed:Connect(updateCashLabel)
+
+
+    updateCashLabel()
+else
+
+    cashLabel:Set("Total C$: Error - C$ not found!")
+end
+
+
+
+local Section = MainTab:AddSection({
+	Name = "Fishing"
+})
+
+MainTab:AddButton({
+	Name = "Sell Holding Fish",
+	Callback = function()
+        Workspace:WaitForChild("world"):WaitForChild("npcs"):WaitForChild("Marc Merchant"):WaitForChild("merchant"):WaitForChild("sell"):InvokeServer()
+  	end    
+})
+
+MainTab:AddButton({
+	Name = "Sell All Fishes",
+	Callback = function()
+        Workspace:WaitForChild("world"):WaitForChild("npcs"):WaitForChild("Marc Merchant"):WaitForChild("merchant"):WaitForChild("sellall"):InvokeServer()
+  	end    
+})
+
+MainTab:AddButton({
+	Name = "Appraise fish (450C$)",
+	Callback = function()
+        Workspace:WaitForChild("world"):WaitForChild("npcs"):WaitForChild("Appraiser"):WaitForChild("appraiser"):WaitForChild("appraise"):InvokeServer()
+  	end    
+})
+
+
+MainTab:AddButton({
+	Name = "AutoReel + AutoShake + AutoCast - COMBINE",
+	Callback = function()
+        local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Turtle-Brand/Turtle-Lib/main/source.lua"))()
+
+
+        local window = library:Window("DEVILS FISCH AUTO FARM", {Color = Color3.fromRGB(25, 35, 45), Size = UDim2.new(0, 500, 0, 400)})
+        
+        
+        local Players = game:GetService('Players')
+        local CoreGui = game:GetService('StarterGui')
+        local GuiService = game:GetService('GuiService')
+        local ReplicatedStorage = game:GetService('ReplicatedStorage')
+        local ContextActionService = game:GetService('ContextActionService')
+        local VirtualInputManager = game:GetService('VirtualInputManager')
+        local UserInputService = game:GetService('UserInputService')
+        
+        local LocalPlayer = Players.LocalPlayer
+        
+        
+        local enabled = false
+        local rod = nil
+        local progress = false
+        local finished = false
+        local loopPosition
+        local keybind = Enum.KeyCode.X
+        local totalCatches = 0
+        
+        
+        local function ShowNotification(message, duration)
+            CoreGui:SetCore('SendNotification', {
+                Title = 'Devils Hub',
+                Text = message,
+                Duration = duration or 0.5,  
+                Button1Text = "Okay"
+            })
+        end
+        
+        
+        local function ToggleFarm(_, state)
+            if state == Enum.UserInputState.Begin then
+                enabled = not enabled
+                
+                if enabled then
+                    loopPosition = LocalPlayer.Character.HumanoidRootPart.Position
+                    farmStartTime = tick()
+                    ShowNotification("Auto Farm: Enabled", 1.5)
+                else
+                    finished = false
+                    progress = false
+                    GuiService.SelectedObject = nil
+                    
+                    if rod then
+                        rod.events.reset:FireServer()
+                    end
+                    
+                    ShowNotification("Auto Farm: Disabled", 1.5)
+                end
+            end
+        end
+        
+        
+        LocalPlayer.Character.ChildAdded:Connect(function(child)
+            if child:IsA('Tool') and child.Name:lower():find('rod') then
+                rod = child
+            end
+        end)
+        
+        
+        LocalPlayer.Character.ChildRemoved:Connect(function(child)
+            if child == rod then
+                enabled = false
+                finished = false
+                progress = false
+                rod = nil
+                GuiService.SelectedObject = nil
+            end
+        end)
+        
+        
+        LocalPlayer.PlayerGui.DescendantAdded:Connect(function(descendant)
+            if enabled then
+                if descendant.Name == 'button' and descendant.Parent.Name == 'safezone' then
+                    task.wait(0.3)
+                    GuiService.SelectedObject = descendant
+                    VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.Return, false, game)
+                    VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.Return, false, game)
+                    task.wait(0.1)
+                    GuiService.SelectedObject = nil
+                elseif descendant.Name == 'playerbar' and descendant.Parent.Name == 'bar' then
+                    finished = true
+                    descendant:GetPropertyChangedSignal('Position'):Wait()
+                    ReplicatedStorage.events.reelfinished:FireServer(100, true)
+                    totalCatches = totalCatches + 1
+                end
+            end
+        end)
+        
+        
+        LocalPlayer.PlayerGui.DescendantRemoving:Connect(function(descendant)
+            if descendant.Name == 'reel' then
+                finished = false
+                progress = false
+            end
+        end)
+        
+        
+        task.spawn(function()
+            while true do
+                if enabled and not progress then
+                    if rod then
+                        progress = true
+                        task.wait(0.5)
+                        rod.events.reset:FireServer()
+                        rod.events.cast:FireServer(100.5)
+                    end
+                end
+                
+        
+        
+                task.wait()
+            end
+        end)
+        
+        
+        task.spawn(function()
+            while true do
+                if enabled then
+                    LocalPlayer.Character.HumanoidRootPart.Position = loopPosition
+                end
+                task.wait(0.75)
+            end
+        end)
+        
+        
+        if not UserInputService.KeyboardEnabled then
+            ContextActionService:BindAction('ToggleFarm', ToggleFarm, false, keybind, Enum.UserInputType.Touch)
+            ContextActionService:SetTitle('ToggleFarm', 'Toggle Farm')
+            ContextActionService:SetPosition('ToggleFarm', UDim2.new(0.9, -50, 0.9, -150))
+            ShowNotification('Press the onscreen button to enable/disable', 3)
+        else
+            ContextActionService:BindAction('ToggleFarm', ToggleFarm, false, keybind)
+            ShowNotification(string.format("Made By hassanxzayn", keybind.Name), 3)
+        end
+        
+        window:Label("---- NEOX'S HUB ----", Color3.fromRGB(255, 0, 0))
+        
+        
+        
+        local farmStatusLabel = window:Label("Auto Farm Status: OFF", Color3.fromRGB(255, 165, 0))
+        local catchCountLabel = window:Label("Catches: 0", Color3.fromRGB(127, 143, 166))
+        
+        task.spawn(function()
+            while true do
+                if enabled then
+                    farmStatusLabel.Text = "Auto Farm Status: ON"
+                else
+                    farmStatusLabel.Text = "Auto Farm Status: OFF"
+                end
+                catchCountLabel.Text = "Fishes Catches: " .. totalCatches
+                task.wait(1)
+            end
+        end)
+        
+        
+        
+        
+        window:Label("----------------------", Color3.fromRGB(255, 0, 0))
+        window:Label("INFO : ", Color3.fromRGB(255, 0, 0))
+        window:Label("How To Enable : X - ON/OFF", Color3.fromRGB(255, 165, 0))
+        window:Label("Current Version : v1.1", Color3.fromRGB(255, 165, 0))
+        window:Label("----------------------", Color3.fromRGB(255, 0, 0))
+        window:Label("Credits/Report :", Color3.fromRGB(255, 0, 0))
+        window:Label("hassanxzayn@gmail.com", Color3.fromRGB(127, 143, 166))
+        window:Label("Made By hassanxzayn", Color3.fromRGB(255, 0, 0))
+        
+  	end    
+})
+
+
+
+MainTab:AddToggle({
+    Name = "Freeze Position",
+    Default = false,
+    Callback = function(Value)
+        pcall(function()
+
+            local player = game:GetService("Players").LocalPlayer
+            if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                player.Character.HumanoidRootPart.Anchored = Value
+            else
+                warn("Player or HumanoidRootPart not found!")
+            end
+        end)
+    end    
+})
+
+
+local toggleChecked = false  
+
+MainTab:AddToggle({
+    Name = "Anti-Cheat",
+    Default = false,
+    Callback = function(Value)
+        if Value ~= toggleChecked then
+            toggleChecked = Value
+            if Value then
+                OrionLib:MakeNotification({
+                    Name = "ANTI-CHEAT",
+                    Content = "ANTI-CHEAT Enabled",
+                    Image = "",
+                    Time = 5
+                })
+            else
+                OrionLib:MakeNotification({
+                    Name = "ANTI-CHEAT",
+                    Content = "ANTI-CHEAT Disabled",
+                    Image = "",
+                    Time = 5
+                })
+            end
+        end
+    end    
+})
+
+MainTab:AddButton({
+	Name = "Anti AFK",
+	Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/hassanxzayn-lua/Anti-afk/main/antiafkbyhassanxzyn"))();
+  	end    
+})
+
+
+
+
+local meTab = Window:MakeTab({
+	Name = "Misc",
+	Icon = "rbxassetid://7733789088",
+	PremiumOnly = false
+})
+
+local Section = meTab:AddSection({
+	Name = "User Settings"
+})
+
+meTab:AddSlider({
+	Name = "WalkSpeed",
+	Min = 16,
+	Max = 500,
+	Default = 16,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "",
+	Callback = function(Value)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = (Value)
+	end    
+})
+
+meTab:AddSlider({
+	Name = "Jump Power",
+	Min = 50,
+	Max = 500,
+	Default = 50,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "",
+	Callback = function(Value)
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = (Value)
+	end    
+})
+
+meTab:AddToggle({ 
+    Name = "Disable Oxygen", 
+    Default = false,
+    Callback = function(Value)
+        local LocalPlayer = game.Players.LocalPlayer
+        local LocalCharacter = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+
+
+        local AntiDrown = Value
+
+
+        if AntiDrown then
+            if LocalCharacter ~= nil and LocalCharacter:FindFirstChild("client") and LocalCharacter.client:FindFirstChild("oxygen") then
+                local oxygen = LocalCharacter.client.oxygen
+                if oxygen and oxygen.Enabled then
+                    oxygen.Enabled = false
+                end
+            end
+            
+
+            LocalPlayer.CharacterAdded:Connect(function()
+                LocalCharacter = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+                if LocalCharacter ~= nil and LocalCharacter:FindFirstChild("client") and LocalCharacter.client:FindFirstChild("oxygen") then
+                    local oxygen = LocalCharacter.client.oxygen
+                    if oxygen and oxygen.Enabled then
+                        oxygen.Enabled = false
+                    end
+                end
+            end)
+        else
+
+            if LocalCharacter ~= nil and LocalCharacter:FindFirstChild("client") and LocalCharacter.client:FindFirstChild("oxygen") then
+                local oxygen = LocalCharacter.client.oxygen
+                if oxygen and not oxygen.Enabled then
+                    oxygen.Enabled = true
+                end
+            end
+        end
+    end    
+})
+
+
+
+
+local isTeleportEnabled = false
+local hasUserToggled = false
+local connection
+
+meTab:AddToggle({ 
+	Name = "Ctrl + TP", 
+	Default = false,
+	Callback = function(Value)
+
+		if not hasUserToggled and not isTeleportEnabled then
+			hasUserToggled = true
+			isTeleportEnabled = Value
+			return
+		end
+		
+		isTeleportEnabled = Value
+		if Value then
+			game.StarterGui:SetCore("SendNotification", {Title="DEVILS HUB"; Text="Click teleport enabled"; Duration=5;})
+			
+			if not connection then
+				connection = game:GetService("UserInputService").InputBegan:Connect(function(input, gameProcessed)
+					if not gameProcessed and isTeleportEnabled and input.UserInputType == Enum.UserInputType.MouseButton1 then
+						if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftControl) then
+							local player = game:GetService("Players").LocalPlayer
+							local mouse = player:GetMouse()
+							player.Character:MoveTo(Vector3.new(mouse.Hit.x, mouse.Hit.y, mouse.Hit.z))
+						end
+					end
+				end)
+			end
+		else
+			game.StarterGui:SetCore("SendNotification", {Title="DEVILS HUB"; Text="Click teleport disabled"; Duration=5;})
+			
+
+			if connection then
+				connection:Disconnect()
+				connection = nil
+			end
+		end
+	end
+})
+
+
+meTab:AddToggle({ 
+	Name = "Infinite Jump", 
+	Default = false,
+	Callback = function(Value)
+		_G.infinjump = Value
+
+		if Value then
+
+			game.StarterGui:SetCore("SendNotification", {
+				Title = "DEVILS HUB",
+				Text = "The Infinite Jump exploit is ready!",
+				Duration = 5,
+			})
+		end
+	end    
+})
+
+
+if not _G.infinJumpStarted then
+
+	_G.infinJumpStarted = true
+	_G.infinjump = false
+
+
+	local plr = game:GetService('Players').LocalPlayer
+	local m = plr:GetMouse()
+
+	m.KeyDown:Connect(function(key)
+		if _G.infinjump then
+			if key:byte() == 32 then
+				local humanoid = plr.Character and plr.Character:FindFirstChildOfClass('Humanoid')
+				if humanoid then
+					humanoid:ChangeState('Jumping')
+					wait()
+					humanoid:ChangeState('Seated')
+				end
+			end
+		end
+	end)
+end
+
+
+meTab:AddToggle({
+    Name = "ESP",
+    Default = false,
+    Callback = function(Value)
+        if Value then
+
+            _G.WRDESPEnabled = true
+        else
+
+            _G.WRDESPEnabled = false
+        end
+    end
+})
+
+
+_G.WRDESPEnabled = false
+_G.WRDESPBoxes = true
+_G.WRDESPTeamColors = false
+_G.WRDESPTracers = false
+_G.WRDESPNames = true
+
+
+if not _G.WRDESPLoaded then
+    local ESP = {
+        Enabled = false,
+        Boxes = true,
+        BoxShift = CFrame.new(0, -1.5, 0),
+        BoxSize = Vector3.new(4, 6, 0),
+        Color = Color3.fromRGB(255, 0, 0),
+        FaceCamera = false,
+        Names = true,
+        TeamColor = false,
+        Thickness = 2,
+        AttachShift = 1,
+        TeamMates = true,
+        Players = true,
+        Objects = setmetatable({}, { __mode = "kv" }),
+        Overrides = {}
+    }
+
+    local cam = workspace.CurrentCamera
+    local plrs = game:GetService("Players")
+    local plr = plrs.LocalPlayer
+
+
+    local function Draw(obj, props)
+        local new = Drawing.new(obj)
+        for i, v in pairs(props or {}) do
+            new[i] = v
+        end
+        return new
+    end
+
+    function ESP:Toggle(bool)
+        self.Enabled = bool
+        if not bool then
+            for _, v in pairs(self.Objects) do
+                if v.Type == "Box" then
+                    if v.Temporary then
+                        v:Remove()
+                    else
+                        for _, comp in pairs(v.Components) do
+                            comp.Visible = false
+                        end
+                    end
+                end
+            end
+        end
+    end
+
+    function ESP:Add(obj, options)
+        local box = setmetatable({
+            Name = options.Name or obj.Name,
+            Type = "Box",
+            Object = obj,
+            Player = plrs:GetPlayerFromCharacter(obj),
+            PrimaryPart = options.PrimaryPart or obj:FindFirstChild("HumanoidRootPart"),
+            Components = {},
+            Color = Color3.fromRGB(255, 0, 0),
+            Size = self.BoxSize
+        }, { __index = ESP })
+
+        box.Components["Quad"] = Draw("Quad", { Thickness = self.Thickness, Visible = self.Boxes, Color = box.Color })
+        box.Components["Name"] = Draw("Text", { Text = box.Name, Center = true, Outline = true, Visible = self.Names, Color = box.Color })
+        self.Objects[obj] = box
+    end
+
+    local function PlayerAdded(p)
+        p.CharacterAdded:Connect(function(char)
+            ESP:Add(char, {
+                Name = p.Name,
+                PrimaryPart = char:WaitForChild("HumanoidRootPart")
+            })
+        end)
+        if p.Character then
+            ESP:Add(p.Character, {
+                Name = p.Name,
+                PrimaryPart = p.Character:FindFirstChild("HumanoidRootPart")
+            })
+        end
+    end
+
+    plrs.PlayerAdded:Connect(PlayerAdded)
+    for _, v in pairs(plrs:GetPlayers()) do
+        if v ~= plr then
+            PlayerAdded(v)
+        end
+    end
+
+    game:GetService("RunService").RenderStepped:Connect(function()
+        for _, v in (ESP.Enabled and pairs or ipairs)(ESP.Objects) do
+            if v.PrimaryPart then
+                local pos, onScreen = cam:WorldToViewportPoint(v.PrimaryPart.Position)
+                if onScreen then
+                    v.Components["Quad"].Visible = true
+                    v.Components["Quad"].Color = v.Color
+                    v.Components["Name"].Visible = true
+                    v.Components["Name"].Text = v.Name
+                    v.Components["Name"].Position = Vector2.new(pos.X, pos.Y)
+                else
+                    v.Components["Quad"].Visible = false
+                    v.Components["Name"].Visible = false
+                end
+            end
+        end
+    end)
+
+    coroutine.wrap(function()
+        while wait(0.1) do
+            ESP:Toggle(_G.WRDESPEnabled)
+            ESP.Boxes = _G.WRDESPBoxes
+            ESP.TeamColor = _G.WRDESPTeamColors
+            ESP.Names = _G.WRDESPNames
+        end
+    end)()
+
+    _G.WRDESPLoaded = true
+end
+
+
+
+
+local TpTab = Window:MakeTab({
+	Name = "Teleports",
+	Icon = "rbxassetid://7733924216",
+	PremiumOnly = false
+})
+
+
+TpTab:AddDropdown({
+	Name = "Teleport Locations",
+	Default = "Select",
+	Options = {"Altar", "arch", "birch", "brine", "deep", 
+	           "deepshop", "enchant", "executive", "keepers", "mod_house", "moosewood", "mushgrove", "roslit", "snow", "snowcap", "spike", "statue", "sunstone", "swamp", "terrapin", "trident", "vertigo", "volcano", "wilson", "wilsons_rod",},
+	Callback = function(Value)
+		local teleportLocations = {
+			["Altar"] = Vector3.new(1296.320068359375, -808.5519409179688, -298.93817138671875),
+			["arch"] = Vector3.new(998.966796875, 126.6849365234375, -1237.1434326171875),
+			["birch"] = Vector3.new(1742.3203125, 138.25787353515625, -2502.23779296875),
+			["brine"] = Vector3.new(-1794.10596, -145.849701, -3302.92358, -5.16176224e-05, 3.10316682e-06, 0.99999994, 0.119907647, 0.992785037, 3.10316682e-06, -0.992785037, 0.119907647, -5.16176224e-05),
+			["deep"] = Vector3.new(-1510.88672, -237.695053, -2852.90674, 0.573604643, 0.000580655003, 0.81913209, -0.000340352941, 0.999999762, -0.000470530824, -0.819132209, -8.89541116e-06, 0.573604763),
+			["deepshop"] = Vector3.new(-979.196411, -247.910156, -2699.87207, 0.587748766, 0, 0.809043527, 0, 1, 0, -0.809043527, 0, 0.587748766),
+			["enchant"] = Vector3.new(1296.320068359375, -808.5519409179688, -298.93817138671875),
+			["executive"] = Vector3.new(-29.836761474609375, -250.48486328125, 199.11614990234375),
+			["keepers"] = Vector3.new(1296.320068359375, -808.5519409179688, -298.93817138671875),
+			["mod_house"] = Vector3.new(-30.205902099609375, -249.40594482421875, 204.0529022216797),
+            ["moosewood"] = Vector3.new(383.10113525390625, 131.2406005859375, 243.93385314941406),
+            ["mushgrove"] = Vector3.new(2501.48583984375, 127.7583236694336, -720.699462890625),
+            ["roslit"] = Vector3.new(-1476.511474609375, 130.16842651367188, 671.685302734375),
+            ["snow"] = Vector3.new(2648.67578125, 139.06605529785156, 2521.29736328125),
+            ["snowcap"] = Vector3.new(2648.67578125, 139.06605529785156, 2521.29736328125),
+            ["spike"] = Vector3.new(-1254.800537109375, 133.88555908203125, 1554.2021484375),
+            ["statue"] = Vector3.new(72.8836669921875, 138.6964874267578, -1028.4193115234375),
+            ["sunstone"] = Vector3.new(-933.259705, 128.143951, -1119.52063, -0.342042685, 0, -0.939684391, 0, 1, 0, 0.939684391, 0, -0.342042685),
+            ["swamp"] = Vector3.new(2501.48583984375, 127.7583236694336, -720.699462890625),
+            ["terrapin"] = Vector3.new(-143.875244140625, 141.1676025390625, 1909.6070556640625),
+            ["trident"] = Vector3.new(-1479.48987, -228.710632, -2391.39307, 0.0435845852, 0, 0.999049723, 0, 1, 0, -0.999049723, 0, 0.0435845852),
+            ["vertigo"] = Vector3.new(-112.007278, -492.901093, 1040.32788, -1, 0, 0, 0, 1, 0, 0, 0, -1),
+            ["volcano"] = Vector3.new(-1888.52319, 163.847565, 329.238281, 1, 0, 0, 0, 1, 0, 0, 0, 1),
+            ["wilson"] = Vector3.new(2938.80591, 277.474762, 2567.13379, 0.4648332, 0, 0.885398269, 0, 1, 0, -0.885398269, 0, 0.4648332),
+            ["wilsons_rod"] = Vector3.new(2879.2085, 135.07663, 2723.64233, 0.970463336, -0.168695927, -0.172460333, 0.141582936, -0.180552125, 0.973321974, -0.195333466, -0.968990743, -0.151334763)
+		}
+
+		local targetPosition = teleportLocations[Value]
+		if targetPosition then
+			local player = game.Players.LocalPlayer
+			if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+				player.Character.HumanoidRootPart.CFrame = CFrame.new(targetPosition)
+			end
+		else
+			warn("Invalid location selected!")
+		end
+	end
+})
+
+
+TpTab:AddDropdown({
+	Name = "Fish Area Teleport",
+	Default = "Select",
+	Options = {"Roslit_Bay", "Ocean", "Snowcap_Pond", "Moosewood_Docks", "Deep_Ocean", 
+	           "Vertigo", "Snowcap_Ocean", "Harvesters_Spike", "SunStone", "Roslit_Bay_Ocean", "Moosewood_Pond", "Terrapin_Ocean", "Isonade", "Moosewood_Ocean", "Roslit_Pond", "Moosewood_Ocean_Mythical", "Terrapin_Olm", "The_Arch", "Scallop_Ocean", "SunStone_Hidden", "Mushgrove_Stone", "Keepers_Altar", "Lava", "Roslit_Pond_Seaweed",},
+	Callback = function(Value)
+		local teleportLocations = {
+            ["Roslit_Bay"] = Vector3.new(-1663.73889, 149.234116, 495.498016, 0.0380855016, 4.08820178e-08, -0.999274492, 5.74658472e-08, 1, 4.3101906e-08, 0.999274492, -5.90657123e-08, 0.0380855016),
+            ["Ocean"] = Vector3.new(7665.104, 125.444443, 2601.59351, 0.999966085, -0.000609769544, -0.00821684115, 0.000612694537, 0.999999762, 0.000353460142, 0.00821662322, -0.000358482561, 0.999966204),
+            ["Snowcap_Pond"] = Vector3.new(2778.09009, 283.283783, 2580.323, 1, 7.17688531e-09, -2.22843701e-05, -7.17796267e-09, 1, -4.83369114e-08, 2.22843701e-05, 4.83370712e-08, 1),
+            ["Moosewood_Docks"] = Vector3.new(343.2359924316406, 133.61595153808594, 267.0580139160156),
+            ["Deep_Ocean"] = Vector3.new(3569.07153, 125.480949, 6697.12695, 0.999980748, -0.00188910461, -0.00591362361, 0.00193980196, 0.999961317, 0.00857902411, 0.00589718809, -0.00859032944, 0.9999457),
+            ["Vertigo"] = Vector3.new(-137.697098, -736.86377, 1233.15271, 1, -1.61821543e-08, -2.01375751e-05, 1.6184277e-08, 1, 1.05423091e-07, 2.01375751e-05, -1.0542341e-07, 1),
+            ["Snowcap_Ocean"] = Vector3.new(3088.66699, 131.534332, 2587.11304, 1, 4.30694858e-09, -1.19097813e-14, -4.30694858e-09, 1, -2.80603398e-08, 1.17889275e-14, 2.80603398e-08, 1),
+            ["Harvesters_Spike"] = Vector3.new(-1234.61523, 125.228767, 1748.57166, 0.999991536, -0.000663080777, -0.00405627443, 0.000725277001, 0.999881923, 0.0153511297, 0.00404561637, -0.0153539423, 0.999873936),
+            ["SunStone"] = Vector3.new(-845.903992, 133.172211, -1163.57776, 1, -7.93465915e-09, -2.09446498e-05, 7.93544608e-09, 1, 3.75741536e-08, 2.09446498e-05, -3.75743205e-08, 1),
+            ["Roslit_Bay_Ocean"] = Vector3.new(-1708.09302, 155.000015, 384.928009, 1, -9.84460868e-09, -3.24939563e-15, 9.84460868e-09, 1, 4.66220271e-08, 2.79042003e-15, -4.66220271e-08, 1),
+            ["Moosewood_Pond"] = Vector3.new(509.735992, 152.000031, 302.173004, 1, -1.78487678e-08, -8.1329488e-14, 1.78487678e-08, 1, 8.45405168e-08, 7.98205428e-14, -8.45405168e-08, 1),
+            ["Terrapin_Ocean"] = Vector3.new(58.6469994, 135.499985, 2147.41699, 1, 2.09643041e-08, -5.6023784e-15, -2.09643041e-08, 1, -9.92988376e-08, 3.52064755e-15, 9.92988376e-08, 1),
+            ["Isonade"] = Vector3.new(-1060.99902, 121.164787, 953.996033, 0.999958456, 0.000633197487, -0.00909138657, -0.000568434712, 0.999974489, 0.00712434994, 0.00909566507, -0.00711888634, 0.999933302),
+            ["Moosewood_Ocean"] = Vector3.new(-167.642715, 125.19548, 248.009521, 0.999997199, -0.000432743778, -0.0023210498, 0.000467110571, 0.99988997, 0.0148265222, 0.00231437827, -0.0148275653, 0.999887407),
+            ["Roslit_Pond"] = Vector3.new(-1811.96997, 148.047089, 592.642517, 1, 1.12983072e-08, -2.16573972e-05, -1.12998171e-08, 1, -6.97014357e-08, 2.16573972e-05, 6.97016844e-08, 1),
+            ["Moosewood_Ocean_Mythical"] = Vector3.new(252.802994, 135.849625, 36.8839989, 1, -1.98115071e-08, -4.50667564e-15, 1.98115071e-08, 1, 1.22230617e-07, 2.08510289e-15, -1.22230617e-07, 1),
+            ["Terrapin_Olm"] = Vector3.new(22.0639992, 182.000015, 1944.36804, 1, 1.14953362e-08, -2.7011112e-15, -1.14953362e-08, 1, -7.09263972e-08, 1.88578841e-15, 7.09263972e-08, 1),
+            ["The_Arch"] = Vector3.new(1283.30896, 130.923569, -1165.29602, 1, -5.89772364e-09, -3.3183043e-15, 5.89772364e-09, 1, 3.63913486e-08, 3.10367822e-15, -3.63913486e-08, 1),
+            ["Scallop_Ocean"] = Vector3.new(23.2255898, 125.236847, 738.952271, 0.999990165, -0.00109633175, -0.00429760758, 0.00115595153, 0.999902785, 0.0138949333, 0.00428195624, -0.013899764, 0.999894202),
+            ["SunStone_Hidden"] = Vector3.new(-1139.55701, 134.62204, -1076.94324, 1, 3.9719481e-09, -1.6278158e-05, -3.97231048e-09, 1, -2.22651142e-08, 1.6278158e-05, 2.22651781e-08, 1),
+            ["Mushgrove_Stone"] = Vector3.new(2525.36011, 131.000015, -776.184021, 1, 1.90145943e-08, -3.24206519e-15, -1.90145943e-08, 1, -1.06596836e-07, 1.21516956e-15, 1.06596836e-07, 1),
+            ["Keepers_Altar"] = Vector3.new(1307.13599, -805.292236, -161.363998, 1, 2.40881981e-10, -3.25609947e-15, -2.40881981e-10, 1, -1.35044154e-09, 3.255774e-15, 1.35044154e-09, 1),
+            ["Lava"] = Vector3.new(-1959.86206, 193.144821, 271.960999, 1, -6.02453598e-09, -2.97388313e-15, 6.02453598e-09, 1, 3.37767716e-08, 2.77039384e-15, -3.37767716e-08, 1),
+            ["Roslit_Pond_Seaweed"] = Vector3.new(-1785.2869873046875, 148.15780639648438, 639.9299926757812),    
+		}
+
+		local targetPosition = teleportLocations[Value]
+		if targetPosition then
+			local player = game.Players.LocalPlayer
+			if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+				player.Character.HumanoidRootPart.CFrame = CFrame.new(targetPosition)
+			end
+		else
+			warn("Invalid location selected!")
+		end
+	end
+})
+
+TpTab:AddDropdown({
+	Name = "Teleport To NPC",
+	Default = "Select",
+	Options = {"Witch", "Quiet_Synph", "Pierre", "Phineas", "Paul", 
+	           "Shipwright", "Angler", "Marc", "Lucas", "Latern_Keeper", "Latern_Keeper2", "Inn_Keeper", "Roslit_Keeper", "FishingNpc_1", "FishingNpc_2", "FishingNpc_3", "Henry", "Daisy", "Appraiser", "Merchant", "Mod_Keeper", "Ashe", "Alfredrickus", },
+	Callback = function(Value)
+		local teleportLocations = {
+            ["Witch"] = Vector3.new(409.638092, 134.451523, 311.403687, -0.74079144, 0, 0.671735108, 0, 1, 0, -0.671735108, 0, -0.74079144),
+            ["Quiet_Synph"] = Vector3.new(566.263245, 152.000031, 353.872101, -0.753558397, 0, -0.657381535, 0, 1, 0, 0.657381535, 0, -0.753558397),
+            ["Pierre"] = Vector3.new(391.38855, 135.348389, 196.712387, -1, 0, 0, 0, 1, 0, 0, 0, -1),
+            ["Phineas"] = Vector3.new(469.912292, 150.69342, 277.954987, 0.886104584, -0, -0.46348536, 0, 1, -0, 0.46348536, 0, 0.886104584),
+            ["Paul"] = Vector3.new(381.741882, 136.500031, 341.891022, -1, 0, 0, 0, 1, 0, 0, 0, -1),
+            ["Shipwright"] = Vector3.new(357.972595, 133.615967, 258.154541, 0, 0, -1, 0, 1, 0, 1, 0, 0),
+            ["Angler"] = Vector3.new(480.102478, 150.501053, 302.226898, 1, 0, 0, 0, 1, 0, 0, 0, 1),
+            ["Marc"] = Vector3.new(466.160034, 151.00206, 224.497086, -0.996853352, 0, -0.0792675018, 0, 1, 0, 0.0792675018, 0, -0.996853352),
+            ["Lucas"] = Vector3.new(449.33963, 181.999893, 180.689072, 0, 0, 1, 0, 1, -0, -1, 0, 0),
+            ["Latern_Keeper"] = Vector3.new(-39.0456772, -246.599976, 195.644363, -1, 0, 0, 0, 1, 0, 0, 0, -1),
+            ["Latern_Keeper2"] = Vector3.new(-17.4230175, -304.970276, -14.529892, -1, 0, 0, 0, 1, 0, 0, 0, -1),
+            ["Inn_Keeper"] = Vector3.new(487.458466, 150.800034, 231.498932, -0.564704418, 0, -0.825293183, 0, 1, 0, 0.825293183, 0, -0.564704418),
+            ["Roslit_Keeper"] = Vector3.new(-1512.37891, 134.500031, 631.24353, 0.738236904, 0, -0.674541533, 0, 1, 0, 0.674541533, 0, 0.738236904),
+            ["FishingNpc_1"] = Vector3.new(-1429.04138, 134.371552, 686.034424, 0, 0.0168599077, -0.999857903, 0, 0.999857903, 0.0168599077, 1, 0, 0),
+            ["FishingNpc_2"] = Vector3.new(-1778.55408, 149.791779, 648.097107, 0.183140755, 0.0223737024, -0.982832015, 0, 0.999741018, 0.0227586292, 0.983086705, -0.00416803267, 0.183093324),
+            ["FishingNpc_3"] = Vector3.new(-1778.26807, 147.83165, 653.258606, -0.129575253, 0.501478612, 0.855411887, -2.44146213e-05, 0.862683058, -0.505744994, -0.991569638, -0.0655529201, -0.111770131),
+            ["Henry"] = Vector3.new(483.539307, 152.383057, 236.296143, -0.789363742, 0, 0.613925934, 0, 1, 0, -0.613925934, 0, -0.789363742),
+            ["Daisy"] = Vector3.new(581.550049, 165.490753, 213.499969, -0.964885235, 0, -0.262671858, 0, 1, 0, 0.262671858, 0, -0.964885235),
+            ["Appraiser"] = Vector3.new(453.182373, 150.500031, 206.908783, 0, 0, 1, 0, 1, -0, -1, 0, 0),
+            ["Merchant"] = Vector3.new(416.690521, 130.302628, 342.765289, -0.249025017, -0.0326484665, 0.967946589, -0.0040341015, 0.999457955, 0.0326734781, -0.968488574, 0.00423171744, -0.249021754),
+            ["Mod_Keeper"] = Vector3.new(-39.0905838, -245.141144, 195.837891, -0.948549569, -0.0898146331, -0.303623199, -0.197293222, 0.91766715, 0.34490931, 0.247647122, 0.387066364, -0.888172567),
+            ["Ashe"] = Vector3.new(-1709.94055, 149.862411, 729.399536, -0.92290163, 0.0273250472, -0.384064913, 0, 0.997478604, 0.0709675401, 0.385035753, 0.0654960647, -0.920574605),
+            ["Alfredrickus"] = Vector3.new(-1520.60632, 142.923264, 764.522034, 0.301733732, 0.390740901, -0.869642735, 0.0273988936, 0.908225596, 0.417582989, 0.952998459, -0.149826124, 0.26333645),
+		}
+
+		local targetPosition = teleportLocations[Value]
+		if targetPosition then
+			local player = game.Players.LocalPlayer
+			if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+				player.Character.HumanoidRootPart.CFrame = CFrame.new(targetPosition)
+			end
+		else
+			warn("Invalid location selected!")
+		end
+	end
+})
+
+
+TpTab:AddDropdown({
+	Name = "Teleport To Items",
+	Default = "Select",
+	Options = {"Training_Rod", "Plastic_Rod", "Lucky_Rod", "Kings_Rod", "Flimsy_Rod", 
+	           "Nocturnal_Rod", "Fast_Rod", "Carbon_Rod", "Long_Rod", "Mythical_Rod",
+               "Midas_Rod", "Trident_Rod", "Enchated_Altar", "Bait_Crate",
+               "Quality_Bait_Crate", "Crab_Cage", "GPS", "Basic_Diving_Gear", "Fish_Radar", },
+	Callback = function(Value)
+		local teleportLocations = {
+            ["Training_Rod"] = Vector3.new(457.693848, 148.357529, 230.414307, 1, -0, 0, 0, 0.975410998, 0.220393807, -0, -0.220393807, 0.975410998),
+            ["Plastic_Rod"] = Vector3.new(454.425385, 148.169739, 229.172424, 0.951755166, 0.0709736273, -0.298537821, -3.42726707e-07, 0.972884834, 0.231290117, 0.306858391, -0.220131472, 0.925948203),
+            ["Lucky_Rod"] = Vector3.new(446.085999, 148.253006, 222.160004, 0.974526405, -0.22305499, 0.0233404674, 0.196993902, 0.901088715, 0.386306256, -0.107199371, -0.371867687, 0.922075212),
+            ["Kings_Rod"] = Vector3.new(1375.57642, -810.201721, -303.509247, -0.7490201, 0.662445903, -0.0116144121, -0.0837960541, -0.0773290396, 0.993478119, 0.657227278, 0.745108068, 0.113431036),
+            ["Flimsy_Rod"] = Vector3.new(471.107697, 148.36171, 229.642441, 0.841614008, 0.0774728209, -0.534493923, 0.00678436086, 0.988063335, 0.153898612, 0.540036798, -0.13314943, 0.831042409),
+            ["Nocturnal_Rod"] = Vector3.new(-141.874237, -515.313538, 1139.04529, 0.161644459, -0.98684907, 1.87754631e-05, 1.87754631e-05, 2.21133232e-05, 1, -0.98684907, -0.161644459, 2.21133232e-05),
+            ["Fast_Rod"] = Vector3.new(447.183563, 148.225739, 220.187454, 0.981104493, 1.26492232e-05, 0.193478703, -0.0522461236, 0.962867677, 0.264870107, -0.186291039, -0.269973755, 0.944674432),
+            ["Carbon_Rod"] = Vector3.new(454.083618, 150.590073, 225.328827, 0.985374212, -0.170404434, 1.41561031e-07, 1.41561031e-07, 1.7285347e-06, 1, -0.170404434, -0.985374212, 1.7285347e-06),
+            ["Long_Rod"] = Vector3.new(485.695038, 171.656326, 145.746109, -0.630167365, -0.776459217, -5.33461571e-06, 5.33461571e-06, -1.12056732e-05, 1, -0.776459217, 0.630167365, 1.12056732e-05),
+            ["Mythical_Rod"] = Vector3.new(389.716705, 132.588821, 314.042847, 0, 1, 0, 0, 0, -1, -1, 0, 0),
+            ["Midas_Rod"] = Vector3.new(401.981659, 133.258316, 326.325745, 0.16456604, 0.986365497, 0.00103566051, 0.00017541647, 0.00102066994, -0.999999464, -0.986366034, 0.1645661, -5.00679016e-06),
+            ["Trident_Rod"] = Vector3.new(-1484.34192, -222.325562, -2194.77002, -0.466092706, -0.536795318, 0.703284025, -0.319611132, 0.843386114, 0.43191275, -0.824988723, -0.0234660208, -0.56466186),
+            ["Enchated_Altar"] = Vector3.new(1310.54651, -799.469604, -82.7303467, 0.999973059, 0, 0.00733732153, 0, 1, 0, -0.00733732153, 0, 0.999973059),
+            ["Bait_Crate"] = Vector3.new(384.57513427734375, 135.3519287109375, 337.5340270996094),
+            ["Quality_Bait_Crate"] = Vector3.new(-177.876, 144.472, 1932.844),
+            ["Crab_Cage"] = Vector3.new(474.803589, 149.664566, 229.49469, -0.721874595, 0, 0.692023814, 0, 1, 0, -0.692023814, 0, -0.721874595),
+            ["GPS"] = Vector3.new(517.896729, 149.217636, 284.856842, 7.39097595e-06, -0.719539165, -0.694451928, -1, -7.39097595e-06, -3.01003456e-06, -3.01003456e-06, 0.694451928, -0.719539165),
+            ["Basic_Diving_Gear"] = Vector3.new(369.174774, 132.508835, 248.705368, 0.228398502, -0.158300221, -0.96061182, 1.58026814e-05, 0.986692965, -0.162594408, 0.973567724, 0.037121132, 0.225361705),
+            ["Fish_Radar"] = Vector3.new(365.75177, 134.50499, 274.105804, 0.704499543, -0.111681774, -0.70086211, 1.32396817e-05, 0.987542748, -0.157350808, 0.709704578, 0.110844307, 0.695724905)
+		}
+
+		local targetPosition = teleportLocations[Value]
+		if targetPosition then
+			local player = game.Players.LocalPlayer
+			if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+				player.Character.HumanoidRootPart.CFrame = CFrame.new(targetPosition)
+			end
+		else
+			warn("Invalid location selected!")
+		end
+	end
+})
+
+local trollTab = Window:MakeTab({
+	Name = "Troll Players",
+	Icon = "rbxassetid://7734059095",
+	PremiumOnly = false
+})
+
+local Section = trollTab:AddSection({
+	Name = "TROLL PLAYER | DOGGY BANG"
+})
+
+
+local FollowConnection
+local AnimationTrack
+
+
+trollTab:AddTextbox({
+	Name = "Player Name",
+	Default = "",
+	TextDisappear = true,
+	Callback = function(Value)
+
+		local Players = game:GetService("Players")
+		local RunService = game:GetService("RunService")
+		local LocalPlayer = Players.LocalPlayer
+
+
+		local TargetPlayer = Players:FindFirstChild(Value)
+		if not TargetPlayer then
+			warn("Player not found!")
+			return
+		end
+
+
+		local TargetCharacter = TargetPlayer.Character
+		if not TargetCharacter or not TargetCharacter:FindFirstChild("HumanoidRootPart") then
+			warn("Target player's character is not fully loaded!")
+			return
+		end
+
+
+		local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+		local Humanoid = Character:FindFirstChild("Humanoid")
+		if not Humanoid then
+			warn("LocalPlayer's humanoid is missing!")
+			return
+		end
+
+
+		local Animation = Instance.new("Animation")
+		Animation.AnimationId = "rbxassetid://148840371"
+		AnimationTrack = Humanoid:LoadAnimation(Animation)
+		AnimationTrack:Play()
+		AnimationTrack:AdjustSpeed(2.5)
+
+
+		if FollowConnection then
+			FollowConnection:Disconnect()
+		end
+
+		FollowConnection = RunService.Stepped:Connect(function()
+
+			if TargetCharacter:FindFirstChild("HumanoidRootPart") and Character:FindFirstChild("HumanoidRootPart") then
+				Character.HumanoidRootPart.CFrame = TargetCharacter.HumanoidRootPart.CFrame
+			else
+
+				warn("Target player or their character is no longer valid.")
+				FollowConnection:Disconnect()
+				FollowConnection = nil
+			end
+		end)
+	end
+})
+
+
+trollTab:AddButton({
+	Name = "Stop!",
+	Callback = function()
+
+		if FollowConnection then
+			FollowConnection:Disconnect()
+			FollowConnection = nil
+			print("Player movement stopped.")
+		else
+			print("No active movement to stop.")
+		end
+
+
+		if AnimationTrack then
+			AnimationTrack:Stop()
+			AnimationTrack = nil
+			print("Animation stopped.")
+		end
+	end
+})
+
+local Section = trollTab:AddSection({
+	Name = "SINGLE PLAYER | DOGGY BANG"
+})
+
+local AnimationId = "rbxassetid://148840371"
+local Animation
+local HumanoidAnimation
+local RunService
+local Player = game:GetService("Players").LocalPlayer
+local Character
+local Humanoid
+local SteppedConnection
+
+trollTab:AddToggle({
+    Name = "Doggy Bang",
+    Default = false,
+    Callback = function(Value)
+        if Value then
+
+            Animation = Instance.new("Animation")
+            Animation.AnimationId = AnimationId
+            Character = Player.Character or Player.CharacterAdded:Wait()
+            Humanoid = Character:WaitForChild("Humanoid")
+            HumanoidAnimation = Humanoid:LoadAnimation(Animation)
+            
+
+            HumanoidAnimation:Play()
+            HumanoidAnimation:AdjustSpeed(2.5)
+
+
+            RunService = game:GetService("RunService")
+            SteppedConnection = RunService.Stepped:Connect(function()
+                local CharacterHRP = Character:FindFirstChild("HumanoidRootPart")
+                if CharacterHRP then
+
+                    CharacterHRP.CFrame = CFrame.new(CharacterHRP.Position)
+                end
+            end)
+        else
+
+            if HumanoidAnimation then
+                HumanoidAnimation:Stop()
+            end
+            if SteppedConnection then
+                SteppedConnection:Disconnect()
+            end
+        end
+    end    
+})
+
+local Section = trollTab:AddSection({
+	Name = "Sit On Player Head"
+})
+
+trollTab:AddTextbox({
+	Name = "Enter Player Name",
+	Default = "",
+	TextDisappear = true,
+	Callback = function(Value)
+
+		local otherPlayer = game.Workspace:FindFirstChild(Value)
+		if otherPlayer and otherPlayer:FindFirstChild("HumanoidRootPart") then
+			local me = game.Players.LocalPlayer.Character.HumanoidRootPart
+			local hum = game.Players.LocalPlayer.Character.Humanoid
+			local other = otherPlayer.HumanoidRootPart
+
+
+			_G.LOOP = true
+			while _G.LOOP == true do
+				task.wait()
+				me.CFrame = other.CFrame * CFrame.new(0, 0.3, 1.5)
+				hum.Sit = true
+			end
+		else
+			warn("Player not found or doesn't have a HumanoidRootPart!")
+		end
+	end	  
+})
+
+trollTab:AddButton({
+	Name = "Stop",
+	Callback = function()
+
+		_G.LOOP = false
+		print("Script stopped!")
+	end    
+})
+
+local Section = trollTab:AddSection({
+	Name = "Be someones carpet"
+})
+
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+
+
+local function r15(player)
+	return player.Character and player.Character:FindFirstChildOfClass("Humanoid") and player.Character:FindFirstChildOfClass("Humanoid").RigType == Enum.HumanoidRigType.R15
+end
+
+
+local function getRoot(character)
+	return character and (character:FindFirstChild("HumanoidRootPart") or character:FindFirstChild("Torso"))
+end
+
+
+local carpetLoop
+local carpetDied
+local carpet
+local carpetAnim
+
+trollTab:AddTextbox({
+	Name = "Enter Player Name",
+	Default = "",
+	TextDisappear = true,
+	Callback = function(Value)
+		local speaker = Players.LocalPlayer
+		if not r15(speaker) then
+
+			if carpetLoop then
+				carpetLoop:Disconnect()
+				carpetDied:Disconnect()
+				carpet:Stop()
+				carpetAnim:Destroy()
+			end
+
+			wait()
+
+
+			local targetPlayer = Players:FindFirstChild(Value)
+			if targetPlayer then
+
+				carpetAnim = Instance.new("Animation")
+				carpetAnim.AnimationId = "rbxassetid://282574440"
+				carpet = speaker.Character:FindFirstChildOfClass('Humanoid'):LoadAnimation(carpetAnim)
+				carpet:Play(.1, 1, 1)
+
+				carpetDied = speaker.Character:FindFirstChildOfClass("Humanoid").Died:Connect(function()
+					carpetLoop:Disconnect()
+					carpet:Stop()
+					carpetAnim:Destroy()
+					carpetDied:Disconnect()
+				end)
+
+
+				carpetLoop = RunService.Heartbeat:Connect(function()
+					pcall(function()
+						getRoot(speaker.Character).CFrame = getRoot(targetPlayer.Character).CFrame
+					end)
+				end)
+			else
+				warn("Player not found: " .. Value)
+			end
+		else
+			warn("This command requires the R6 rig type")
+		end
+	end
+})
+
+
+trollTab:AddButton({
+	Name = "Stop",
+	Callback = function()
+
+		if carpetLoop then
+			carpetLoop:Disconnect()
+			carpetLoop = nil
+		end
+		if carpetDied then
+			carpetDied:Disconnect()
+			carpetDied = nil
+		end
+		if carpet then
+			carpet:Stop()
+			carpet:Destroy()
+			carpet = nil
+		end
+		if carpetAnim then
+			carpetAnim:Destroy()
+			carpetAnim = nil
+		end
+		print("Carpet effect stopped.")
+	end    
+})
+
+local Section = trollTab:AddSection({
+	Name = "Push Ups / Float"
+})
+
+trollTab:AddButton({
+	Name = "Start",
+	Callback = function()
+        local player = game.Players.LocalPlayer
+        local StarterGui = game:GetService("StarterGui")
+        function notifyPlayer(title, text)
+            StarterGui:SetCore("SendNotification", {
+                Title = title;
+                Text = text;
+                Duration = 20;
+            })
+        end
+        
+        
+        notifyPlayer("Press (Q) To Sleep", "Yeh SLEEP")
+        notifyPlayer("Press (j) To Push Ups", "Girls Like GYM Boys")
+        
+        
+        
+        local fake_transparency = 1
+        local Motors = {
+            ["Left Hip"] = 0,
+            ["Neck"] = 0,
+            ["Left Shoulder"] = 0,
+            ["Right Hip"] = 0,
+            ["Right Shoulder"] = 0
+        }
+        local TS = game:GetService("TweenService")
+        local function getnext(tbl, number)
+            local closestDiff = math.huge
+            local closestValue = 0
+            for i, v in pairs(tbl) do
+                if i > number and i - number < closestDiff then
+                    closestDiff = i - number
+                    closestValue = i
+                end
+            end
+            return closestValue
+        end
+        local function kftotbl(kf)
+            local tbl3 = {}
+            for _, v in pairs(kf:GetDescendants()) do
+                if v:IsA("Pose") then
+                    tbl3[string.sub(v.Name, 1, 1) .. string.sub(v.Name, #v.Name, #v.Name)] = v.CFrame
+                end
+            end
+            return tbl3
+        end
+        local function getSpeed(lastTimeStamp, currentTimeStamp)
+            if currentTimeStamp == 0 then return 0 end
+            return math.abs(lastTimeStamp - currentTimeStamp)
+        end
+        local function getAnimation(animationId)
+            local animationObject
+            local success, errorMsg = pcall(function()
+                animationObject = game:GetObjects(animationId)[1]
+            end)
+            if not success then
+                warn("Failed to load animation: " .. errorMsg)
+                return nil
+            end
+            return animationObject
+        end
+        local Main = {}
+        Main.__index = Main
+        
+        function Main.LoadDummy(DummyChar)
+            local metatable = {}
+            setmetatable(metatable, Main)
+            metatable.char = DummyChar
+            return metatable
+        end
+        
+        function Main:LoadAnimation(animationId)
+            local Character = self.char
+            local animationObject = getAnimation(animationId)
+            if not animationObject then return end
+            print(animationObject)
+            local metatable = {}
+            setmetatable(metatable, Main)
+            metatable.char = Character
+            metatable.animObject = animationObject
+            return metatable
+        end
+        
+        function Main:Play()
+            local Character = self.char
+            local animationObject = self.animObject
+            local Looped = true
+            local anim = {}
+        
+            for _, v in pairs(animationObject:GetChildren()) do
+                if v:IsA("Keyframe") then
+                    anim[v.Time] = kftotbl(v)
+                end
+            end
+        
+            local LH = Character.Torso["Left Hip"].C0
+            local RH = Character.Torso["Right Hip"].C0
+            local LS = Character.Torso["Left Shoulder"].C0
+            local RS = Character.Torso["Right Shoulder"].C0
+            local RoH = Character.HumanoidRootPart["RootJoint"].C0
+            local N = Character.Torso["Neck"].C0
+            local count = -1
+            local lastTimeStamp = 0
+        
+            self.played = false
+            local times = {
+                Lg = 0,
+                Rg = 0,
+                Lm = 0,
+                Rm = 0,
+                To = 0,
+                Hd = 0
+            }
+            local lasttime = tick()
+        
+            while not self.played do
+                local timepassed = tick() - lasttime
+                if not Looped then 
+                    self.played = true
+                end	
+                for i, v in pairs(anim) do
+                    local asdf = getnext(anim, count)
+                    v = anim[asdf]
+                    count = asdf
+        
+                    task.wait(asdf - count)
+
+                    if v["Lg"] then
+                        local Ti = TweenInfo.new(getSpeed(lastTimeStamp, asdf) + times.Lg + getSpeed(lastTimeStamp, asdf))
+                        times.Lg = 0
+                        TS:Create(Character.Torso["Left Hip"], Ti, {C0 = LH * v["Lg"]}):Play()
+                    else
+                        times.Lg = times.Lg + getSpeed(lastTimeStamp, asdf)
+                    end
+                    if v["Rg"] then
+                        local Ti = TweenInfo.new(getSpeed(lastTimeStamp, asdf) + times.Rg + getSpeed(lastTimeStamp, asdf))
+                        times.Rg = 0
+                        TS:Create(Character.Torso["Right Hip"], Ti, {C0 = RH * v["Rg"]}):Play()
+                    else
+                        times.Rg = times.Rg + getSpeed(lastTimeStamp, asdf)
+                    end
+                    if v["Lm"] then
+                        local Ti = TweenInfo.new(getSpeed(lastTimeStamp, asdf) + times.Lm + getSpeed(lastTimeStamp, asdf))
+                        times.Lm = 0
+                        TS:Create(Character.Torso["Left Shoulder"], Ti, {C0 = LS * v["Lm"]}):Play()
+                    else
+                        times.Lm = times.Lm + getSpeed(lastTimeStamp, asdf)
+                    end
+                    if v["Rm"] then
+                        local Ti = TweenInfo.new(getSpeed(lastTimeStamp, asdf) + times.Rm + getSpeed(lastTimeStamp, asdf))
+                        times.Rm = 0
+                        TS:Create(Character.Torso["Right Shoulder"], Ti, {C0 = RS * v["Rm"]}):Play()
+                    else
+                        times.Rm = times.Rm + getSpeed(lastTimeStamp, asdf)
+                    end
+                    if v["To"] then
+                        local Ti = TweenInfo.new(getSpeed(lastTimeStamp, asdf) + times.To + getSpeed(lastTimeStamp, asdf))
+                        times.To = 0
+                        TS:Create(Character.HumanoidRootPart["RootJoint"], Ti, {C0 = RoH * v["To"]}):Play()
+                    else
+                        times.To = times.To + getSpeed(lastTimeStamp, asdf)
+                    end
+                    if v["Hd"] then
+                        local Ti = TweenInfo.new(getSpeed(lastTimeStamp, asdf) + times.Hd + getSpeed(lastTimeStamp, asdf))
+                        times.Hd = 0
+                        TS:Create(Character.Torso["Neck"], Ti, {C0 = N * v["Hd"]}):Play()
+                    else
+                        times.Hd = times.Hd + getSpeed(lastTimeStamp, asdf)
+                    end
+                    task.wait(getSpeed(lastTimeStamp, asdf))
+                    lastTimeStamp = asdf
+                end
+            end
+            
+
+            Character.Torso["Left Hip"].C0 = LH
+            Character.Torso["Right Hip"].C0 = RH
+            Character.Torso["Left Shoulder"].C0 = LS
+            Character.Torso["Right Shoulder"].C0 = RS
+            Character.HumanoidRootPart["RootJoint"].C0 = RoH
+            Character.Torso["Neck"].C0 = N
+        end
+        
+        function Main:Stop()
+            self.played = true
+        end
+        
+
+        local animationplayer = Main
+        
+        local LoadedAnimationTable = {}
+        
+        local Players = game:GetService("Players")
+        local Player = Players.LocalPlayer
+        local RunService = game:GetService("RunService")
+        
+        game.Players.LocalPlayer.Character.Archivable = true
+        local FakeCharacter = game.Players.LocalPlayer.Character:Clone()
+        
+        Player.Character:BreakJoints()
+        Player.Character = nil
+        
+        local Connection
+        Connection = game.Workspace.DescendantAdded:Connect(function(c)
+            if c.Name == "Animate" and c.Parent == Player.Character then
+                c.Enabled = false   
+                Connection:Disconnect()
+            end
+        end)
+        
+        repeat task.wait() until game.Players.LocalPlayer.Character
+        task.wait(0.1)
+        
+        local RealChar = Player.Character
+        RealChar.Archivable = true
+        FakeCharacter.Name = "non"
+        FakeCharacter.Parent = workspace
+        
+        local rig = animationplayer.LoadDummy(FakeCharacter)
+        
+        
+        task.spawn(function()
+            for _, LS in ipairs(FakeCharacter:GetChildren()) do
+                if LS:IsA("LocalScript") then
+                    LS.Enabled = false
+                    task.wait(0.1)
+                    LS.Enabled = false
+                end
+            end
+        end)
+        
+        for _, Part in ipairs(FakeCharacter:GetDescendants()) do
+            if Part:IsA("BasePart") then
+                Part.Transparency = fake_transparency
+            end
+        end
+        
+        for _, Decal in ipairs(FakeCharacter:GetDescendants()) do
+            if Decal:IsA("Decal") then
+                Decal.Transparency = fake_transparency
+            end
+        end
+        
+        Player.Character = FakeCharacter
+        
+        local function MotorAngle()
+            if RealChar:FindFirstChild("Torso") then
+                for MotorName, Motor6DAngle in pairs(Motors) do
+                    if RealChar:FindFirstChild("Torso"):FindFirstChild(MotorName) then
+                        RealChar:FindFirstChild("Torso"):FindFirstChild(MotorName).CurrentAngle = Motor6DAngle
+                    end
+                end
+            end
+        end
+        
+        local function SetAngles()
+            if FakeCharacter:FindFirstChild("Torso") then
+                for MotorName, Motor6DAngle in pairs(Motors) do
+                    if FakeCharacter:FindFirstChild("Torso"):FindFirstChild(MotorName) then
+                        local Motor = FakeCharacter:FindFirstChild("Torso"):FindFirstChild(MotorName)
+                        local rx, ry, rz = Motor.Part1.CFrame:ToObjectSpace(FakeCharacter:FindFirstChild("Torso").CFrame):ToOrientation()
+                        if Motor.Name == "Right Shoulder" then
+                            Motors[MotorName] = -rx
+                        end
+                        if Motor.Name == "Left Shoulder" then
+                            Motors[MotorName] = rx
+                        end
+                        if Motor.Name == "Right Hip" then
+                            Motors[MotorName] = -rx
+                        end
+                        if Motor.Name == "Left Hip" then
+                            Motors[MotorName] = rx
+                        end
+                        if Motor.Name == "Neck" then
+                            Motors[MotorName] = -ry
+                        end
+                    end
+                end
+            end
+        end
+        
+        local KFFolder = Instance.new("Folder")
+        KFFolder.Parent = game.ReplicatedStorage
+        
+        
+        local function BaseCol()
+            for _, Part in ipairs(RealChar:GetChildren()) do
+                if Part:IsA("BasePart") then
+                    Part.CanCollide = false
+                end
+            end
+            for _, Part in ipairs(FakeCharacter:GetChildren()) do
+                if Part:IsA("BasePart") then
+                    Part.CanCollide = false
+                end
+            end
+        end
+        
+        RunService.Heartbeat:Connect(function()
+            SetAngles()
+            MotorAngle()
+            pcall(function()
+            RealChar.HumanoidRootPart.CFrame = FakeCharacter.Torso.CFrame
+            RealChar.HumanoidRootPart.Velocity = 0
+            end)
+        end)
+        
+        
+        
+        
+        RunService.PreSimulation:Connect(function()
+            BaseCol()
+        end)
+        
+        
+        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-FE-Nameless-Animations-V4-4249"))()
+        
+        task.wait(1)
+        
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/GGH52lan/GGH52lan/main/keyboard.txt"))()
+        
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Gazer-Ha/Energize-Protected/main/Yh"))()
+        
+        local bodyVelocity = Instance.new("BodyVelocity")
+        bodyVelocity.MaxForce = Vector3.new(0.1, 0.1, 0.1)
+        bodyVelocity.Velocity = Vector3.new(0, 0, 0) 
+        bodyVelocity.Parent = RealChar.HumanoidRootPart
+        
+  	end    
+})
+
+trollTab:AddParagraph("How To Get Back To Normal Character ?","You have to fall down to get back to the normal character. Noclip is Automatically ON so you just have to get through the wall to fall down -- This Is in ( BETA ) So Don't Try")
+
+local reportTab = Window:MakeTab({
+	Name = "Info/Report",
+	Icon = "rbxassetid://7733992732",
+	PremiumOnly = false
+})
+
+reportTab:AddParagraph("Note : ","I know this script may have some bugs, but don't worry, it will be updated as the game gets updated. If you encounter any issues or bugs, feel free to share them with me. You can reach me via email at hassanxzayn@gmail.com or on Instagram @hassanxzayn.")
+
+local creditTab = Window:MakeTab({
+	Name = "Credits",
+	Icon = "rbxassetid://7743871002",
+	PremiumOnly = false
+})
+
+creditTab:AddParagraph("Made by","Fisch | NEOX Hub Made by hassanxzayn (no, it's not a team, just one guy with too much free time!).Wanna talk to me? Or just stalk my memes? Follow me on Instagram at @hassanxzayn. I promise, I’m cooler online. ")
+end
